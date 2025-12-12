@@ -15,39 +15,27 @@ jobs:
 
     steps:
 
-      - name: set variables
-        id: set_variables
-        run: |
-          echo "sing-box-v${{ env.SING_VERSION }}" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ env.SING_VERSION }}" == "${{ env.SING_IOS_VERSION }}" ]; then
-            echo "SING_VERSION_MATCH=true" >> $GITHUB_ENV
-          else
-            echo "SING_VERSION_MATCH=true" >> $GITHUB_ENV
-          fi
+  
 
       - name: Checkout this repo
-        if: ${{ env.SING_VERSION_MATCH != 'true' }}
+     
         uses: actions/checkout@main
 
       - name: Setup Go
-        if: ${{ env.SING_VERSION_MATCH != 'true' }}
         uses: actions/setup-go@v5
         with:
           go-version: ^1.25
 
       - name: Setup Xcode stable
-        if: ${{ env.SING_VERSION_MATCH != 'true' }}
         run: |-
           sudo xcode-select -s /Applications/Xcode.app
 
 
       - name: Install ldid (via brew)
-        if: ${{ env.SING_VERSION_MATCH != 'true' }}
         run: |
           brew install ldid
 
       - name: Build TIPA
-        if: ${{ env.SING_VERSION_MATCH != 'true' }}
         run: |
           cd $HOME
 
