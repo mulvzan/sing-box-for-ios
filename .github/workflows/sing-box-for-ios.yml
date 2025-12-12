@@ -45,8 +45,8 @@ jobs:
         run: |
           cd $HOME
 
-          echo "sing-box-v${{ inputs.tag_name }}" >> $GITHUB_STEP_SUMMARY
-          git clone -b v${{ inputs.tag_name }} --recurse-submodules --depth 1 https://github.com/SagerNet/sing-box.git
+          
+          git clone  --recurse-submodules --depth 1 https://github.com/SagerNet/sing-box.git
           cd $HOME/sing-box
 
           make lib_install
